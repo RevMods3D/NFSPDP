@@ -111,3 +111,35 @@ const searchInput = document.getElementById('searchInput');
       });
     });
   }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const selectWrappers = document.querySelectorAll('.custom-select-wrapper');
+
+  selectWrappers.forEach(wrapper => {
+    const trigger = wrapper.querySelector('.custom-select-trigger');
+    const options = wrapper.querySelectorAll('.custom-option');
+    const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+
+    trigger.addEventListener('click', () => {
+      wrapper.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        trigger.textContent = option.textContent;
+        hiddenInput.value = option.dataset.value;
+        wrapper.classList.remove('open');
+      });
+    });
+  });
+
+  // Close all selects if clicking outside
+  document.addEventListener('click', e => {
+    selectWrappers.forEach(wrapper => {
+      if (!wrapper.contains(e.target)) {
+        wrapper.classList.remove('open');
+      }
+    });
+  });
+});

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Add Pursuit | NFS Police RP</title>
   <link rel="icon" type="image/x-icon" href="/resources/SiteLogo.png">
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.default.min.css" rel="stylesheet">
 </head>
+
 <body>
   <header class="page-header">
     <div class="nav-container">
@@ -41,13 +44,16 @@
       <label>Pursuit Duration (minutes)</label>
       <input type="number" name="duration" min="1" placeholder="e.g., 10" required>
 
-      <label>Outcome</label>
-      <select name="outcome" required class="fancy-select">
-        <option value="">Select Outcome</option>
-        <option value="Arrested">Arrested</option>
-        <option value="Escaped">Escaped</option>
-        <option value="Terminated">Terminated</option>
-      </select>
+      <label for="outcome">Outcome</label>
+      <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" tabindex="0">Select Outcome</div>
+        <div class="custom-options">
+          <span class="custom-option" data-value="1">Arrested</span>
+          <span class="custom-option" data-value="2">Escaped</span>
+          <span class="custom-option" data-value="3">Terminated</span>
+        </div>
+        <input type="hidden" name="outcome" value="">
+      </div>
 
       <label>Notes</label>
       <textarea name="notes" rows="4" placeholder="Additional information..."></textarea>
@@ -68,6 +74,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
   <script src="scripts.js"></script>
 </body>
+
 </html>

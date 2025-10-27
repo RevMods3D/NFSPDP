@@ -506,18 +506,55 @@ nav a.active {
   line-height: 1.5;
 }
 
-.fancy-select {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  padding: 8px 12px;
-  border: 2px solid #555;
-  border-radius: 6px;
-  background-color: #f0f0f0;
-  color: #222;
-  width: 200px;
-  cursor: pointer;
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 100%; /* full width like other inputs */
+  margin-bottom: 20px;
 }
 
-.fancy-select option {
-  padding: 8px;
+.custom-select-trigger {
+  display: block;
+  padding: 12px;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.custom-select-trigger:focus {
+  background: rgba(255,255,255,0.12);
+  outline: none;
+}
+
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  margin-top: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.custom-option {
+  padding: 12px;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.custom-option:hover {
+  background: rgba(0,123,255,0.2);
+}
+
+.custom-select-wrapper.open .custom-options {
+  display: block;
 }
