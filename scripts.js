@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(script);
   }
 
-    // --- Load Officers Table (read-only) ---
+  // --- Load Officers Table (read-only) ---
   const officerTableBody = document.querySelector('#officerTable tbody');
   if (officerTableBody) {
     window.displayOfficers = function (data) {
@@ -85,32 +85,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('keyup', () => {
-      const filter = searchInput.value.toLowerCase();
-      const table = document.querySelector('#pursuitTable');
-      const rows = table.querySelectorAll('tbody tr');
+if (searchInput) {
+  searchInput.addEventListener('keyup', () => {
+    const filter = searchInput.value.toLowerCase();
+    const table = document.querySelector('#pursuitTable');
+    const rows = table.querySelectorAll('tbody tr');
 
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(filter) ? '' : 'none';
-      });
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(filter) ? '' : 'none';
     });
-  }
+  });
+}
 
-  const officerSearch = document.getElementById('officerSearch');
-  if (officerSearch) {
-    officerSearch.addEventListener('keyup', () => {
-      const filter = officerSearch.value.toLowerCase();
-      const table = document.querySelector('#officerTable');
-      const rows = table.querySelectorAll('tbody tr');
+const officerSearch = document.getElementById('officerSearch');
+if (officerSearch) {
+  officerSearch.addEventListener('keyup', () => {
+    const filter = officerSearch.value.toLowerCase();
+    const table = document.querySelector('#officerTable');
+    const rows = table.querySelectorAll('tbody tr');
 
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(filter) ? '' : 'none';
-      });
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(filter) ? '' : 'none';
     });
-  }
+  });
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
