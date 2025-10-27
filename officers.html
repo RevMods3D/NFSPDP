@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Officer Directory | NFSPD</title>
+  <link rel="icon" type="image/x-icon" href="/resources/SiteLogo.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="page-header">
+    <div class="nav-container">
+      <div class="logo">NFSPD</div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="rules.html">Rules</a>
+        <a href="officers.html">Officers</a>
+        <a href="add_pursuits.html">Add Pursuit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="officers-section">
+    <div class="panel">
+      <h1>Officer Directory</h1>
+      <p class="lead">View the list of registered officers.</p>
+
+      <div class="table-wrap">
+        <table id="officerTable" class="styled-table" aria-describedby="officers-desc">
+          <caption id="officers-desc" class="visually-hidden">Registered officers and their details</caption>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Rank</th>
+              <th>Division</th>
+              <th>Badge</th>
+              <th>Status</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="loading-row">
+              <td colspan="6" class="loading-cell">Loading officers…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>NFS Police Department</h2>
+        <p>Committed to law, order, and integrity in every pursuit.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NFSPD. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

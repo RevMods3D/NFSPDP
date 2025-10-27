@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pursuit Log | NFSPD</title>
+  <link rel="icon" type="image/x-icon" href="/resources/SiteLogo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header class="page-header">
+    <div class="nav-container">
+      <div class="logo">NFSPD</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="rules.html">Rules</a>
+        <a href="officers.html">Officers</a>
+        <a href="add_pursuits.html">Add Pursuit</a>
+      </nav>
+    </div>
+    <div class="header-overlay"></div>
+  </header>
+
+  <main class="pursuits-section">
+    <h1>Pursuit Log</h1>
+    <p>All logged pursuits are displayed below. Filter or sort as needed.</p>
+
+    <input type="text" id="searchInput" placeholder="Search by Officer, Suspect, or Vehicle..." class="search-box">
+
+    <table id="pursuitTable">
+      <thead>
+        <tr>
+          <th>Officer</th>
+          <th>Suspect</th>
+          <th>Vehicle</th>
+          <th>Date</th>
+          <th>Duration (min)</th>
+          <th>Outcome</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="loading-row">
+          <td colspan="6" class="loading-cell">Loading database...</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>Need for Speed Police RP</h2>
+        <p>Teamwork. Discipline. Justice.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NFSPD. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

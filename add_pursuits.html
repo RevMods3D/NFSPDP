@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Pursuit | NFS Police RP</title>
+  <link rel="icon" type="image/x-icon" href="/resources/SiteLogo.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="nav-container">
+      <div class="logo">NFS Police RP</div>
+      <nav>
+        <a href="rules.html">Rules</a>
+        <a href="index.html">Home</a>
+        <a href="officers.html">Officers</a>
+        <a href="pursuits.html">Pursuits</a>
+      </nav>
+    </div>
+    <div class="header-overlay"></div>
+  </header>
+
+  <main class="form-section">
+    <h1>Log a Pursuit</h1>
+    <p>Fill out the details below to record your pursuit. Be as accurate as possible.</p>
+
+    <form id="pursuitForm" class="pursuit-form">
+      <label>Officer Name</label>
+      <input type="text" name="officer" placeholder="Enter your name" required>
+
+      <label>Suspect Name</label>
+      <input type="text" name="suspect" placeholder="Enter suspect name" required>
+
+      <label>Vehicle Involved</label>
+      <input type="text" name="vehicle" placeholder="e.g., Mustang GT" required>
+
+      <label>Date</label>
+      <input type="date" name="date" required>
+
+      <label>Pursuit Duration (minutes)</label>
+      <input type="number" name="duration" min="1" placeholder="e.g., 10" required>
+
+      <label>Outcome</label>
+      <select name="outcome" required>
+        <option value="">Select Outcome</option>
+        <option value="Arrested">Arrested</option>
+        <option value="Escaped">Escaped</option>
+        <option value="Terminated">Terminated</option>
+      </select>
+
+      <label>Notes</label>
+      <textarea name="notes" rows="4" placeholder="Additional information..."></textarea>
+
+      <button type="submit" class="button blue">Submit Pursuit</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>Need for Speed Police RP</h2>
+        <p>Teamwork. Discipline. Justice.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NFS Police RP. Designed by the Community.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
