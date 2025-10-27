@@ -32,8 +32,11 @@ main {
 .header::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(10,10,25,0.9));
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(10, 10, 25, 0.9));
   z-index: 1;
 }
 
@@ -52,14 +55,16 @@ main {
   position: absolute;
   top: 0;
   width: 100%;
-  padding: 20px 50px; /* controls left/right space */
+  padding: 20px 50px;
+  /* controls left/right space */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(20,20,40,0.6);
+  background: rgba(20, 20, 40, 0.6);
   backdrop-filter: blur(8px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  box-sizing: border-box; /* includes padding in width calculation */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  /* includes padding in width calculation */
   z-index: 2;
 }
 
@@ -74,8 +79,13 @@ main {
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0%; }
-  100% { background-position: 100%; }
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 100%;
+  }
 }
 
 .nav-container nav {
@@ -115,7 +125,7 @@ main {
   font-size: 1.5em;
   color: #ccc;
   margin-bottom: 40px;
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 .button {
@@ -151,7 +161,7 @@ main {
   border: 2px solid transparent;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
-  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -159,7 +169,7 @@ main {
 
 .hero-buttons .button:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 20px currentColor, 0 0 40px rgba(255,255,255,0.1);
+  box-shadow: 0 0 20px currentColor, 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
 .button.blue {
@@ -203,7 +213,10 @@ main {
 .hero-buttons .button::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: currentColor;
   opacity: 0;
   transition: opacity 0.3s;
@@ -217,8 +230,13 @@ main {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-content h1 { font-size: 2.8em; }
-  .hero-content p { font-size: 1.2em; }
+  .hero-content h1 {
+    font-size: 2.8em;
+  }
+
+  .hero-content p {
+    font-size: 1.2em;
+  }
 }
 
 .site-footer {
@@ -228,7 +246,7 @@ main {
   font-size: 0.95em;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
   width: 100%;
 }
@@ -245,8 +263,13 @@ main {
 }
 
 @keyframes glowline {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 .footer-content {
@@ -254,9 +277,11 @@ main {
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  padding: 0 50px;  /* space from left/right edges */
+  padding: 0 50px;
+  /* space from left/right edges */
   gap: 20px;
-  box-sizing: border-box; /* ensures padding is included in width */
+  box-sizing: border-box;
+  /* ensures padding is included in width */
 }
 
 .footer-left h2 {
@@ -295,7 +320,7 @@ main {
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 15px;
   color: #888;
   font-size: 0.85em;
@@ -322,11 +347,11 @@ main {
 .pursuit-form {
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   padding: 40px;
   border-radius: 20px;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .pursuit-form label {
@@ -342,7 +367,7 @@ main {
   padding: 12px;
   border: none;
   border-radius: 10px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
   font-size: 1em;
   outline: none;
@@ -352,7 +377,7 @@ main {
 .pursuit-form input:focus,
 .pursuit-form select:focus,
 .pursuit-form textarea:focus {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .pursuit-form button {
@@ -367,7 +392,7 @@ main {
   font-family: 'Poppins', sans-serif;
   color: #fff;
   background: #1a1a2e;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 #pursuitTable thead {
@@ -387,11 +412,11 @@ main {
 }
 
 #pursuitTable tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 #pursuitTable tbody tr:hover {
-  background: rgba(0,123,255,0.2);
+  background: rgba(0, 123, 255, 0.2);
 }
 
 .search-box {
@@ -406,7 +431,7 @@ main {
   font-size: 1em;
   background: #1a1a2e;
   color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-box::placeholder {
@@ -420,7 +445,7 @@ main {
   font-family: 'Poppins', sans-serif;
   color: #fff;
   background: #1a1a2e;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -442,11 +467,11 @@ main {
 }
 
 #officerTable tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 #officerTable tbody tr:hover {
-  background: rgba(0,123,255,0.15);
+  background: rgba(0, 123, 255, 0.15);
 }
 
 .table-container {
@@ -468,17 +493,17 @@ nav a.active {
 }
 
 .rule-card {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   padding: 25px 20px;
-  box-shadow: 0 0 15px rgba(0,123,255,0.2);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
   transition: transform 0.3s, box-shadow 0.3s;
   border-left: 5px solid #007bff;
 }
 
 .rule-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(0,123,255,0.5);
+  box-shadow: 0 0 25px rgba(0, 123, 255, 0.5);
 }
 
 .rule-header {
@@ -509,14 +534,15 @@ nav a.active {
 .custom-select-wrapper {
   position: relative;
   user-select: none;
-  width: 100%; /* full width like other inputs */
+  width: 100%;
+  /* full width like other inputs */
   margin-bottom: 20px;
 }
 
 .custom-select-trigger {
   display: block;
   padding: 12px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -526,7 +552,7 @@ nav a.active {
 }
 
 .custom-select-trigger:focus {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   outline: none;
 }
 
@@ -535,13 +561,13 @@ nav a.active {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   overflow: hidden;
   display: none;
   z-index: 1000;
   margin-top: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .custom-option {
@@ -552,7 +578,7 @@ nav a.active {
 }
 
 .custom-option:hover {
-  background: rgba(0,123,255,0.2);
+  background: rgba(0, 123, 255, 0.2);
 }
 
 .custom-select-wrapper.open .custom-options {
