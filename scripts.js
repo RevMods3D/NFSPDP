@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(iframe);
 
     form.target = 'hidden_iframe';
-    form.action = 'https://script.google.com/macros/s/AKfycbwx0fDXmZnwPpV3ecUbqqcOPoNfahgL394MeTZ99Dy2pbaDfsMekf3PnyBPw0QIvsrW/exec';
+    form.action = 'https://script.google.com/macros/s/AKfycbzCDsPaN6cVYGWMOCT3AxbrZSOK7OigLZzddj-pdJ94vE7ZmcfJNOrv6MefQPCSKAxe/exec';
     form.method = 'POST';
 
     form.addEventListener('submit', (e) => {
@@ -51,36 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch data from Google Apps Script (with cache-busting)
     const script = document.createElement('script');
     script.src =
-      'https://script.google.com/macros/s/AKfycby_7H446qxxZE5r2Tohh1yG1fpEXHUogFltBUcoOaQR-Gnja8EVco-evooZ6NPJuFCu/exec?callback=displayPursuits&t=' +
+      'https://script.google.com/macros/s/AKfycbzCDsPaN6cVYGWMOCT3AxbrZSOK7OigLZzddj-pdJ94vE7ZmcfJNOrv6MefQPCSKAxe/exec?callback=displayPursuits&t=' +
       new Date().getTime();
     document.body.appendChild(script);
   }
 
   // --- Load Officers Table (read-only) ---
   const officerTableBody = document.querySelector('#officerTable tbody');
-  if (officerTableBody) {
-    window.displayOfficers = function (data) {
-      officerTableBody.innerHTML = '';
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${row.name || ''}</td>
-          <td>${row.rank || ''}</td>
-          <td>${row.division || ''}</td>
-          <td>${row.badge || ''}</td>
-          <td>${row.status || ''}</td>
-          <td>${row.notes || ''}</td>
-        `;
-        officerTableBody.appendChild(tr);
-      });
-    };
+if (officerTableBody) {
+  // Use your new dynamic rendering function
+  window.displayOfficers = function(data) {
+    renderOfficersTable(data);
+  };
 
-    const script = document.createElement('script');
-    script.src =
-      'https://script.google.com/macros/s/AKfycby_7H446qxxZE5r2Tohh1yG1fpEXHUogFltBUcoOaQR-Gnja8EVco-evooZ6NPJuFCu/exec?callback=displayOfficers&mode=officers&t=' +
-      new Date().getTime();
-    document.body.appendChild(script);
-  }
+  // Load the officer data from your Apps Script
+  const script = document.createElement('script');
+  script.src =
+    'https://script.google.com/macros/s/AKfycbzCDsPaN6cVYGWMOCT3AxbrZSOK7OigLZzddj-pdJ94vE7ZmcfJNOrv6MefQPCSKAxe/exec?callback=displayOfficers&mode=officers&t=' +
+    new Date().getTime();
+  document.body.appendChild(script);
+}
 
 });
 
@@ -143,3 +133,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// Map page filenames to the columns you want to show
+const pageColumnsMap = {
+  "officers.html": ["name", "rank", "division", "badge", "status", "notes"], // all columns
+  "promotion.html": ["name", "rank", "nRank", "officerDate"]        // only selected columns
+};
+
+// Optional: friendly header names for each column
+const columnHeaders = {
+  name: "Officer",
+  rank: "Previous Rank",
+  nRank: "New Rank",
+  officerDate: "Date"
+};
+
+function renderOfficersTable(data) {
+  const tableBody = document.querySelector('#officerTable tbody');
+  const tableHead = document.querySelector('#officerTable thead tr');
+  if (!tableBody || !tableHead) return;
+
+  const path = window.location.pathname.split("/").pop();
+  const visibleCols = pageColumnsMap[path] || Object.keys(data[0] || {});
+
+  // Update headers
+  tableHead.innerHTML = '';
+  visibleCols.forEach(key => {
+    tableHead.innerHTML += `<th>${columnHeaders[key] || key}</th>`;
+  });
+
+  // Render rows
+  tableBody.innerHTML = '';
+  data.forEach(row => {
+    const tr = document.createElement('tr');
+    visibleCols.forEach(key => {
+      tr.innerHTML += `<td>${row[key] || ''}</td>`;
+    });
+    tableBody.appendChild(tr);
+  });
+}

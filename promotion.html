@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Officer Directory | NFSPD</title>
+  <link rel="icon" type="image/x-icon" href="/resources/SiteLogo.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="page-header">
+    <div class="nav-container">
+      <div class="logo">NFSPD</div>
+      <nav>
+        <a href="rules.html">Rules</a>
+
+        <div class="dropdown">
+          <a href="#" class="dropbtn">Officers</a>
+          <div class="dropdown-content">
+            <a href="officers.html">Dashboard</a>
+            <a href="promotion.html">Promotions</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="#" class="dropbtn">Pursuits</a>
+          <div class="dropdown-content">
+            <a href="pursuits.html">Pursuit Log</a>
+            <a href="add_pursuit.html">Add Pursuit</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+<main class="form-section">
+  <h1>Officer Promotions</h1>
+  <p>Recognizing excellence and dedication within the NFS Police Department.</p>
+
+  <div class="promotion-banner">
+    <h2>Congratulations, Officer Vega!</h2>
+    <p>You’ve been promoted to <span class="rank-highlight">Sergeant</span>.</p>
+  </div>
+
+  <div class="rank-grid">
+    <div class="rank-card">
+      <h3>Cadet</h3>
+      <p>Starting rank. Complete 3 pursuits and report 2 successful arrests to advance.</p>
+    </div>
+
+    <div class="rank-card">
+      <h3>Officer</h3>
+      <p>Maintain a 90% pursuit success rate and assist teammates in 5 chases.</p>
+    </div>
+
+    <div class="rank-card">
+      <h3>Sergeant</h3>
+      <p>Lead 10 pursuits, achieve 3 high-value arrests, and demonstrate leadership.</p>
+    </div>
+
+    <div class="rank-card">
+      <h3>Lieutenant</h3>
+      <p>Strategic leadership in team events. Command-level promotion only.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:60px;">Recent Promotions</h2>
+  <input type="text"  class="search-box" placeholder="Search officer...">
+
+  <div class="table-container">
+    <table id="officerTable">
+      <thead>
+        <tr>
+          <th>Officer</th>
+          <th>Previous Rank</th>
+          <th>New Rank</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="loading-row">
+              <td colspan="6" class="loading-cell">Loading officers…</td>
+            </tr>
+          </tbody>
+    </table>
+  </div>
+
+  <div class="hero-buttons" style="margin-top:50px;">
+    <a href="http://discord.com/" class="button blue">Join the Force</a>
+    <a href="/rules" class="button green">Promotion Rules</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>NFS Police Department</h2>
+        <p>Committed to law, order, and integrity in every pursuit.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NFSPD. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
