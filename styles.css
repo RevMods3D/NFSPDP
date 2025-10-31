@@ -723,3 +723,8 @@ nav {
   gap: 20px;
   align-items: center;
 }
+
+#pursuitTable th:nth-child(4),
+#pursuitTable td:nth-child(4) {
+  width: 100px; /* adjust as needed */
+}
