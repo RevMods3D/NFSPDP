@@ -136,5 +136,153 @@
       <p>© 2025 NFSPD. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // Most Wanted page specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      displayMostWanted();
+      updateStatistics();
+      
+      // Search functionality
+      document.getElementById('searchSuspect').addEventListener('input', function(e) {
+        displayMostWanted(e.target.value);
+      });
+      
+      // Heat filter functionality
+      document.getElementById('heatFilter').addEventListener('change', function(e) {
+        displayMostWanted(document.getElementById('searchSuspect').value, e.target.value);
+      });
+    });
+
+    function displayMostWanted(searchTerm = '', heatFilter = 'all') {
+      const container = document.getElementById('mostWantedList');
+      let suspects = suspectDB.getAllSuspects();
+      
+      // Apply search filter
+      if (searchTerm) {
+        suspects = suspects.filter(s => 
+          s.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+      
+      // Apply heat filter
+      if (heatFilter !== 'all') {
+        suspects = suspects.filter(s => {
+          switch(heatFilter) {
+            case 'high': return s.heatLevel >= 7;
+            case 'medium': return s.heatLevel >= 4 && s.heatLevel <= 6;
+            case 'low': return s.heatLevel >= 1 && s.heatLevel <= 3;
+            case 'cold': return s.heatLevel === 0;
+            default: return true;
+          }
+        });
+      }
+      
+      // Sort by heat level (highest first)
+      suspects.sort((a, b) => b.heatLevel - a.heatLevel);
+      
+      if (suspects.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #aaa;">No suspects found</p>';
+        return;
+      }
+      
+      container.innerHTML = '';
+      
+      suspects.forEach((suspect, index) => {
+        const item = document.createElement('div');
+        item.className = 'most-wanted-item';
+        
+        // Add special class for high priority
+        if (suspect.heatLevel >= 7) {
+          item.classList.add('high-priority');
+        }
+        
+        // Generate heat bar
+        const heatPercentage = (suspect.heatLevel / 10) * 100;
+        const heatColor = getHeatColor(suspect.heatLevel);
+        
+        item.innerHTML = `
+          <div class="wanted-rank">#${index + 1}</div>
+          <div class="wanted-info">
+            <div class="wanted-name">
+              ${suspect.name}
+              ${suspect.heatLevel >= 7 ? '<span class="priority-badge">HIGH PRIORITY</span>' : ''}
+            </div>
+            <div class="heat-bar-container">
+              <div class="heat-bar">
+                <div class="heat-fill" style="width: ${heatPercentage}%; background: ${heatColor};"></div>
+              </div>
+              <span class="heat-number">${suspect.heatLevel}/10</span>
+            </div>
+            <div class="wanted-stats">
+              Arrests: ${suspect.arrests} | Escapes: ${suspect.escapes} | 
+              Terminations: ${suspect.terminations} | Total Pursuits: ${suspect.totalPursuits}
+              <br>
+              Last Outcome: ${suspect.lastOutcome || 'N/A'} | 
+              Last Seen: ${formatDate(suspect.lastPursuitDate) || 'Unknown'}
+            </div>
+          </div>
+          <div class="wanted-actions">
+            <button class="view-history-btn" onclick="viewHistory('${suspect.name}')">History</button>
+          </div>
+        `;
+        
+        container.appendChild(item);
+      });
+    }
+
+    function updateStatistics() {
+      const allSuspects = suspectDB.getAllSuspects();
+      const highPriority = allSuspects.filter(s => s.heatLevel >= 7).length;
+      const totalArrests = allSuspects.reduce((sum, s) => sum + s.arrests, 0);
+      const totalEscapes = allSuspects.reduce((sum, s) => sum + s.escapes, 0);
+      
+      document.getElementById('totalSuspects').textContent = allSuspects.length;
+      document.getElementById('highPriority').textContent = highPriority;
+      document.getElementById('totalArrests').textContent = totalArrests;
+      document.getElementById('totalEscapes').textContent = totalEscapes;
+    }
+
+    function getHeatColor(heatLevel) {
+      if (heatLevel >= 7) return '#ff4444'; // Red
+      if (heatLevel >= 4) return '#ffaa00'; // Orange
+      if (heatLevel >= 1) return '#ffdd00'; // Yellow
+      return '#00ff88'; // Green
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return null;
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function viewHistory(suspectName) {
+      const suspect = suspectDB.getSuspect(suspectName);
+      if (!suspect) return;
+      
+      // Create modal or navigate to detailed view
+      alert(`
+        ${suspect.name} - Pursuit History
+        ----------------------------------
+        Total Pursuits: ${suspect.totalPursuits}
+        Arrests: ${suspect.arrests}
+        Escapes: ${suspect.escapes}
+        Terminations: ${suspect.terminations}
+        Current Heat: ${suspect.heatLevel}/10
+        
+        Recent Pursuits:
+        ${suspect.pursuitHistory.slice(-5).map(p => 
+          `${p.date}: ${p.outcome.toUpperCase()}`
+        ).join('\n')}
+      `);
+    }
+  </script>
 </body>
 </html>

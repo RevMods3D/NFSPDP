@@ -192,6 +192,7 @@ class SuspectDatabase {
     if (saved) {
       const data = JSON.parse(saved);
       this.suspects = new Map(Object.entries(data));
+      console.log(`Loaded ${this.suspects.size} suspects from localStorage`);
     }
   }
 
@@ -294,43 +295,70 @@ const suspectDB = new SuspectDatabase();
 
 // Function to fetch and process all pursuits from Google Apps Script
 function loadPursuitsForSuspects() {
+  console.log('Loading pursuits for suspects...');
+  
+  // Check if we already have data in localStorage
+  const existingSuspects = suspectDB.getAllSuspects();
+  if (existingSuspects.length > 0) {
+    console.log(`Using ${existingSuspects.length} suspects from localStorage`);
+    displayMostWanted();
+    updateStatistics();
+  } else {
+    console.log('No localStorage data, fetching from Google Apps Script...');
+  }
+  
   // Create a temporary callback to process pursuit data
   window.processPursuitsForSuspects = function (data) {
-    console.log('Processing pursuits for suspect database...');
-
+    console.log('Received pursuit data:', data);
+    
+    if (!data || data.length === 0) {
+      console.log('No pursuit data received');
+      return;
+    }
+    
     // Clear existing suspect data to rebuild from scratch
     suspectDB.suspects.clear();
-
+    
     // Process all pursuits in chronological order
     const sortedPursuits = data.sort((a, b) => {
       const dateA = new Date(a.date || a.timestamp || 0);
       const dateB = new Date(b.date || b.timestamp || 0);
       return dateA - dateB;
     });
-
+    
     sortedPursuits.forEach(pursuit => {
       const suspectName = pursuit.suspect || pursuit.suspectName || '';
       const outcome = pursuit.outcome || '';
       const date = pursuit.date || pursuit.timestamp || new Date().toISOString();
-
+      
       if (suspectName && outcome) {
         // Update suspect heat based on this pursuit
         suspectDB.updateSuspectHeat(suspectName, outcome, date);
       }
     });
-
+    
     console.log(`Loaded ${suspectDB.getAllSuspects().length} suspects from pursuit data`);
-
+    
     // Update the display
     displayMostWanted();
     updateStatistics();
   };
-
+  
   // Fetch pursuit data from Google Apps Script
   const script = document.createElement('script');
   script.src =
     'https://script.google.com/macros/s/AKfycbzCDsPaN6cVYGWMOCT3AxbrZSOK7OigLZzddj-pdJ94vE7ZmcfJNOrv6MefQPCSKAxe/exec?callback=processPursuitsForSuspects&mode=pursuits&t=' +
     new Date().getTime();
+  
+  script.onerror = function() {
+    console.error('Failed to load data from Google Apps Script');
+    // Use localStorage data if available
+    if (suspectDB.getAllSuspects().length > 0) {
+      displayMostWanted();
+      updateStatistics();
+    }
+  };
+  
   document.body.appendChild(script);
 }
 
@@ -402,9 +430,13 @@ function getOutcomeEmoji(outcome) {
 // Function to display most wanted suspects
 function displayMostWanted(searchTerm = '', heatFilter = 'all') {
   const container = document.getElementById('mostWantedList');
-  if (!container) return;
+  if (!container) {
+    console.log('Container not found');
+    return;
+  }
 
   let suspects = suspectDB.getAllSuspects();
+  console.log(`Displaying ${suspects.length} suspects`);
 
   // Apply search filter
   if (searchTerm) {
@@ -535,7 +567,7 @@ function updateStatistics() {
   totalEscapesEl.textContent = totalEscapes;
 }
 
-// View suspect history with enhanced modal
+// View suspect history with modal
 function viewHistory(suspectName) {
   const suspect = suspectDB.getSuspect(suspectName);
   if (!suspect) return;
@@ -678,7 +710,10 @@ function initializeFilter() {
   const searchInput = document.getElementById('searchSuspect');
   const clearSearch = document.getElementById('clearSearch');
 
-  if (!filterButton || !filterDropdown) return;
+  if (!filterButton || !filterDropdown) {
+    console.log('Filter elements not found');
+    return;
+  }
 
   // Toggle dropdown
   filterButton.addEventListener('click', (e) => {
@@ -753,6 +788,8 @@ function initializeFilter() {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing...');
+  
   // Initialize custom filter
   initializeFilter();
 
